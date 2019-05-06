@@ -5,7 +5,7 @@ export const emailTemplate = (data) => {
         let doc = ele._doc;
         reportData = ` ${reportData} + 
             <td class="esd-block-text es-p5t es-p10b" align="left">
-    <p style="font-size: 16px; color: #777777;"> Total Profit : ${doc.totalProfit} | Total Quantity : ${doc.btcQuantity} | Time : ${doc.timestamp}   <br></p>
+    <p style="font-size: 16px; color: #777777;"> Total Profit : ${doc.totalProfit.toFixed(2)} | Total Quantity : ${doc.btcQuantity.toFixed(2)} | Time : ${doc.timestamp}   <br></p>
     </td>`
     })
     const template = `

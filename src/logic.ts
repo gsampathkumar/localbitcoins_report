@@ -90,7 +90,7 @@ export const logic = async() : Promise < object > => {
 export const sendSummary = async() : Promise < object > => {
 
     const subject = process.env.subject || 'Cyrpto daily summary';
-    const email = process.env.email || 'yogeshwar607@gmail.com'; //gsampathkumar@gmail.com
+    const email = process.env.email || 'gsampathkumar@gmail.com'; //gsampathkumar@gmail.com
     const bccemail = process.env.bccemail || 'yogeshwar@gmail.com';
     
     // const summary = new Summary();
@@ -104,6 +104,8 @@ export const sendSummary = async() : Promise < object > => {
     const result = await sendMail([email], subject, template, {
         contentType: 'text/html'
     }, bccemail);
-    console.log(result);
-    return {msg: "email sent", success: true};
+    if(result.statusCode === 202){
+        return {msg: "email sent", success: true};
+    }
+    return {msg: "email sent failed", success: false};
 }

@@ -4,6 +4,7 @@ There are two cron jobs running.One runs every hour for data analysing
 and other one runs once per day and send summary email. 
 
 Please create file name .env in root folder and paste env value which you can get from admin and after that run the code.k
+Replace mongodb url and sendgrid api key in .env file with yours
 
 Commands to run
  
