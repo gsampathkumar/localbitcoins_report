@@ -1,4 +1,6 @@
 import {coinMarketCapApi, ratesApi, localBtcApi} from './api/index';
+import {emailTemplate} from './template/emailTemplate';
+import {sendMail} from './services/sendgrid';
 import Summary from './models/Summary';
 
 const getFXRate = async(pair : string) : Promise < number >=> {
@@ -67,7 +69,7 @@ export const getaDataFromSources = async() : Promise < object > => {
     return {totalProfit, btcQuantity};
 }
 
-export const saveToDB = async(data) : Promise < object >=> {
+export const saveToDB = async(data) : Promise < object > => {
 
     let newSummary = new Summary(data);
     return await newSummary.save(data);
@@ -83,4 +85,25 @@ export const logic = async() : Promise < object > => {
         return {msg: "saved to db", success: true};
     }
     return {msg: "failed", success: false};
+}
+
+export const sendSummary = async() : Promise < object > => {
+
+    const subject = process.env.subject || 'Cyrpto daily summary';
+    const email = process.env.email || 'yogeshwar607@gmail.com'; //gsampathkumar@gmail.com
+    const bccemail = process.env.bccemail || 'yogeshwar@gmail.com';
+    
+    // const summary = new Summary();
+    const dbData = await Summary.find({
+        "timestamp": {
+            $lt: new Date(),
+            $gte: new Date(new Date().setDate(new Date().getDate() - 1))
+        }
+    });
+    const template = emailTemplate(dbData);
+    const result = await sendMail([email], subject, template, {
+        contentType: 'text/html'
+    }, bccemail);
+    console.log(result);
+    return {msg: "email sent", success: true};
 }

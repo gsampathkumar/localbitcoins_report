@@ -1,3 +1,8 @@
+import * as dotenv from 'dotenv';
+
+// initialize environment variables
+dotenv.config();
+
 import * as SendGrid from 'sendgrid';
 
 export class SendGridMail extends SendGrid.mail.Mail {}
@@ -7,7 +12,7 @@ export class SendGridHelper extends SendGrid.mail.Personalization {}
 
 export const sendMail = (recipients, subject, mailTemplate, options, bccrecipients) => {
 
-    let sendGrid : any = SendGrid('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');
+    let sendGrid : any = SendGrid(process.env.SENDGRID_KEY);
     let mail : SendGridMail = new SendGridMail();
     let personalization : SendGridHelper = new SendGridHelper();
 

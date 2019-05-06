@@ -1,9 +1,15 @@
 import app from './app';
+import Cron from './cron/cron';
+import * as dotenv from 'dotenv';
 
-import {logic} from './logic';
-import {emailTemplate} from './template/emailTemplate';
-import{sendMail}  from './services/sendgrid'
-const PORT = 3000;
+
+import {schedule, ScheduleOptions, ScheduledTask} from 'node-cron';
+import {parseExpression} from 'cron-parser';
+
+// initialize environment variables
+dotenv.config();
+
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, (err : any) => {
     if (err) {
@@ -11,21 +17,13 @@ app.listen(PORT, (err : any) => {
     }
     console.log('Express server listening on port ' + PORT);
 
-    // initiate logic
-    logic().then((data) => {
-        console.log(data);
-       
-    }).catch((e) => {
-        console.log(e, "error in logic call");
-    })
+    // initiate cron task
+
+    const dataAnalyserCron = new Cron('perhour');
+    dataAnalyserCron.startJob(); // run task every hour
+
+    const summaryTaskCron = new Cron('perday');
+    summaryTaskCron.startJob();
 });
 
 
-
-
-const subject = 'Cyrpto daily summary';
-const email = 'yogeshwar607@gmail.com'; //gsampathkumar@gmail.com
-const bccemail = 'yy@gmail.com';
-
-const template = emailTemplate();
-sendMail([email], subject, template, { contentType: 'text/html' }, bccemail);

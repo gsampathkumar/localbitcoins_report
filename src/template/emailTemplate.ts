@@ -1,5 +1,14 @@
-export const emailTemplate = ()=> {
-       const template = `
+export const emailTemplate = (data) => {
+
+    let reportData = '';
+    data.map((ele) => {
+        let doc = ele._id;
+        reportData = ` ${reportData} + 
+            <td class="esd-block-text es-p5t es-p10b" align="left">
+    <p style="font-size: 16px; color: #777777;"> Total Profit : ${doc.totalProfit} | Total Quantity : ${doc.btcQuantity} | Time : ${doc.timestamp}   <br></p>
+    </td>`
+    })
+    const template = `
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html>
     
@@ -148,6 +157,9 @@ export const emailTemplate = ()=> {
                                                                                         <td class="esd-block-text es-p5t es-p10b" align="left">
                                                                                             <p style="font-size: 16px; color: #777777;"><br></p>
                                                                                         </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                    ${reportData}
                                                                                     </tr>
                                                                                 </tbody>
                                                                             </table>
@@ -299,6 +311,4 @@ export const emailTemplate = ()=> {
     </html>
               `
     return template;
-  }
-  
- 
+}

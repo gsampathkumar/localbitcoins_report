@@ -1,12 +1,16 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as mongoose from "mongoose";
+import * as dotenv from 'dotenv';
+
+// initialize environment variables
+dotenv.config();
 
 class App {
 
     public app : express.Application = express();
     
-    public mongoUrl : string = process.env.MONGO_URL || 'mongodb://admin:test123@ds151486.mlab.com:51486/cryptoi';
+    public mongoUrl : string = process.env.MONGO_URL;
 
     constructor() {
         this.config();
