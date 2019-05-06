@@ -6,7 +6,7 @@ export const coinMarketCapApi = async(pair : string) => {
         const response = await request
             .get(`${paths.coinMarketCapQuotes}`)
             .query({'id': '1'})
-            .set('X-CMC_PRO_API_KEY', '9daf003b-b208-40fa-966b-a770bd40a2cd')
+            .set('X-CMC_PRO_API_KEY', process.env.COINMARKETAPI)
             .set('json', 'true')
             .set('gzip', 'true')
            

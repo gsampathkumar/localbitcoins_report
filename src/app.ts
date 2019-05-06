@@ -13,6 +13,8 @@ class App {
     public mongoUrl : string = process.env.MONGO_URL;
 
     constructor() {
+        if(!this.mongoUrl) throw new Error('Provide valid MONGO_URL')
+
         this.config();
         this.mongoConnect();
     }
