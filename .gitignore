@@ -1,7 +1,3 @@
 node_modules
 dist
 
-# sphinx folders
-_build
-_static
-_templates
