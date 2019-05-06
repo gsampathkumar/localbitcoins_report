@@ -2,7 +2,7 @@ export const emailTemplate = (data) => {
 
     let reportData = '';
     data.map((ele) => {
-        let doc = ele._id;
+        let doc = ele._doc;
         reportData = ` ${reportData} + 
             <td class="esd-block-text es-p5t es-p10b" align="left">
     <p style="font-size: 16px; color: #777777;"> Total Profit : ${doc.totalProfit} | Total Quantity : ${doc.btcQuantity} | Time : ${doc.timestamp}   <br></p>
