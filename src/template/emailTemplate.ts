@@ -1,13 +1,25 @@
 export const emailTemplate = (data) => {
-
+    let sum = 0;
+    let quantity =0;
     let reportData = '';
     data.map((ele) => {
         let doc = ele._doc;
-        reportData = ` ${reportData} + 
-            <td class="esd-block-text es-p5t es-p10b" align="left">
-    <p style="font-size: 16px; color: #777777;"> Total Profit : ${doc.totalProfit.toFixed(2)} | Total Quantity : ${doc.btcQuantity.toFixed(2)} | Time : ${doc.timestamp}   <br></p>
-    </td>`
+        sum = sum + doc.totalProfit;
+        quantity = quantity +doc.btcQuantity;
+        reportData = ` ${reportData} 
+            <tr><td align="center">
+     ${doc.totalProfit.toFixed(2)} </td><td  align="center"> ${doc.btcQuantity.toFixed(2)} </td <td  align="center"> ${doc.timestamp} 
+    </td></tr>`
     })
+
+    reportData =  `${reportData} <br><h1>
+        Total Profit : ${sum}
+        <br>
+        Total quantity : ${quantity}
+        <br>
+        <br>
+    </h1`
+
     const template = `
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html>
@@ -159,6 +171,9 @@ export const emailTemplate = (data) => {
                                                                                         </td>
                                                                                     </tr>
                                                                                     <tr>
+                                                                                    <th>Profit(INR)</th>
+                                                                                    <th>Quantity</th>
+                                                                                    <th>Timestamp</th>
                                                                                     ${reportData}
                                                                                     </tr>
                                                                                 </tbody>
