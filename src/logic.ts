@@ -95,11 +95,11 @@ export const sendSummary = async() : Promise < object > => {
     
     // const summary = new Summary();
     const dbData = await Summary.find({
-        "timestamp": {
-            $lt: new Date(),
-            $gte: new Date(new Date().setDate(new Date().getDate() - 1))
+        "timestamp": {           
+            $gt: new Date(Date.now() - (24*60*60 * 1000))
         }
     });
+
     const template = emailTemplate(dbData);
     const result = await sendMail([email], subject, template, {
         contentType: 'text/html'

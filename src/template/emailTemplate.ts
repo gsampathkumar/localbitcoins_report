@@ -1,24 +1,28 @@
 export const emailTemplate = (data) => {
     let sum = 0;
-    let quantity =0;
+    let quantity = 0;
     let reportData = '';
     data.map((ele) => {
         let doc = ele._doc;
         sum = sum + doc.totalProfit;
-        quantity = quantity +doc.btcQuantity;
+        quantity = quantity + doc.btcQuantity;
         reportData = ` ${reportData} 
             <tr><td align="center">
-     ${doc.totalProfit.toFixed(2)} </td><td  align="center"> ${doc.btcQuantity.toFixed(2)} </td <td  align="center"> ${doc.timestamp} 
+     ${doc
+            .totalProfit
+            .toFixed(2)} </td><td  align="center"> ${doc
+            .btcQuantity
+            .toFixed(2)} </td <td  align="center"> ${doc
+            .timestamp} 
     </td></tr>`
     })
 
-    reportData =  `${reportData} <br><h1>
-        Total Profit : ${sum}
+    reportData = `${reportData} <br><h3>
+        Total Profit : ${sum.toFixed(2)}
         <br>
-        Total quantity : ${quantity}
-        <br>
-        <br>
-    </h1`
+        Total quantity : ${quantity.toFixed(2)}
+                <br>
+    </h3>`
 
     const template = `
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
