@@ -1,5 +1,5 @@
 {
-  "name": "indiracrypto",
+  "name": "localbitcoins_report",
   "version": "1.0.0",
   "description": "",
   "main": "dist/server.js",

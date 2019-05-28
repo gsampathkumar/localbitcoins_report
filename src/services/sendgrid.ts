@@ -20,7 +20,7 @@ export const sendMail = (recipients, subject, mailTemplate, options, bccrecipien
     options.contentType = options.contentType || 'text/plain';
     // Creating mail object
 
-    const fromEmail = new SendGridEmail('support@indiracyrptocapital.io', 'Daily crypto summary');
+    const fromEmail = new SendGridEmail('support@indracyrptocapital.io', 'Daily crypto summary');
     mail.setFrom(fromEmail);
     mail.setSubject(subject);
 

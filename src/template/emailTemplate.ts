@@ -128,7 +128,7 @@ export const emailTemplate = (data) => {
                                                                                 <tbody>
                                                                                     <tr>
                                                                                         <td class="esd-block-text es-m-txt-c" align="center">
-                                                                                            <h1 style="color: #ffffff; line-height: 100%;">indiracrypto</h1>
+                                                                                            <h1 style="color: #ffffff; line-height: 100%;">Indra Crypto Capital Localbitcoins Report</h1>
                                                                                         </td>
                                                                                     </tr>
                                                                                 </tbody>
